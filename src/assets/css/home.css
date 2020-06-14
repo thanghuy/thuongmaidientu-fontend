@@ -1,0 +1,199 @@
+.tablink{
+  margin-bottom: 10px;
+}
+.nav-link{
+  font-size: 16px;
+  font-weight: 500;
+}
+.nav-link:hover,.nav-link.close:focus{
+  color: rgb(71, 151, 255);
+  cursor: pointer;
+  visibility: visible;
+  transform: scaleX(1);
+}
+.active-user{
+  border-bottom: 2px solid #FF4747;
+  color: rgb(71, 151, 255);
+  animation: borderTitle 0.5s ease;
+}
+@keyframes borderTitle{
+  from {transform: scaleX(0);}
+  to {transform: scaleX(1);}
+}
+.username, .pass {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Set a style for all buttons */
+  .login {
+    background-color: #0e8ce4;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .login:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  /* Center the image and position the close button */
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 12px;
+    position: relative;
+    height: 10px;
+  }
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 3; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  }
+  
+  /* Modal Content/Box */
+  .form-main-lg{
+    margin-bottom: 50px;
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 6% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 65%; /* Could be more or less, depending on screen size */
+  }
+  .form-left{
+    width: 50%;
+    float: left;
+  }
+  .form-right{
+    width: 45%;
+    float: right;
+  }
+  .lg-facebook{
+    background-color: #3b5998;
+  }
+  .lg-google{
+    background-color: #d34836;
+  }
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 6px;
+    top: -25px;
+    font-weight: normal;
+    font-size: 40px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #f44336;
+    cursor: pointer;
+  }
+  
+  /* Add Zoom Animation */
+  .animate {
+    -webkit-animation: animatezoom 0.4s;
+    animation: animatezoom 0.4s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {transform: translate(0%,-100%)} 
+    to {transform: translate(1,1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: translate(0%,-100%)} 
+    to {transform: translate(1.1)}
+  }
+  .barLoading{
+    background: #fafafa;
+    z-index: 100;
+  }
+  .Progress-Bar{
+    height: 2px;
+    width: 0;
+    background: #0e8ce4;
+  }
+  .signup-m01{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background: #ffffff;
+    padding: 12px;
+    height: 390px;
+  }
+  .title-dk-01{
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-left: 15px;
+  }
+  .form-left label{
+    margin-bottom: 0px !important;
+    margin-top: 6px;
+  }
+  .form-right label{
+    margin-bottom: 0px !important;
+    margin-top: 6px;
+  }
+  .signup-m01 .form-right{
+    margin-top: 16px;
+  }
+  .space-input{
+    height: 85px;
+  }
+  .invalid-feedback{
+    font-size: 12px;
+    margin-top: -4px;
+  }
+  .is-invalid{
+    background-color: rgb(255, 235, 235);
+  }
+/* .list-order-comfirm{
+  width: 100%;
+  height: 400px;
+} */
+.order-detaile-cf td{
+    height: 130px;
+    vertical-align: middle;
+}
+.order-detaile-cf td:nth-child(1){
+    width: 20%;
+}
+.order-detaile-admin td:nth-child(2){
+    width: 40%;
+}
+.order-detaile-cf td:nth-child(3){
+    width: 20%;
+}
+.order-detaile-cf td:nth-child(4){
+    width: 20%;
+    text-align: center;
+}
+.input-address-user{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

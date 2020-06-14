@@ -1,0 +1,118 @@
+.product-review-comment.row {
+    margin-bottom: 10px;
+}
+.product-review-comment small{
+    color: rgb(158, 5, 5);
+}
+.product-review-comment h3.js-customer-h3 {
+    color: #444;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 43px 0 0 15px;
+    width: 100%;
+    background: #fff;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid #f4f4f4 !important;
+}
+.product-customer-col-4 {
+    display: block;
+    background: white;
+    padding: 10px 15px 20px;
+    float: left;
+    border-right: solid 1px #f4f4f4;
+}
+.product-customer-col-4 .rate {
+    margin: 0 0 15px;
+    font-size: 16px;
+}
+.product-customer-col-4 .rate label {
+    margin-bottom: 0;
+    display: inline-block;
+    font-weight: 400;
+}
+.product-customer-col-4 .rate .rating-input {
+    font-size: 0;
+    line-height: 1;
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+    margin-left: 15px;
+}
+.product-customer-col-4 .title label {
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.product-customer-col-4 .title .form-control.input-sm{
+    height: 36px;
+    padding: 7px 8px;
+    border: 1px solid #dfdfdf;
+    font-weight: 300;
+}
+.product-customer-col-4 .review-content label {
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.product-customer-col-4 .review-content .form-control {
+    height: 117px;
+    padding: 7px 8px;
+    border: 1px solid #dfdfdf;
+    font-weight: 400;
+    resize: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+ .product-customer-col-4 button {
+    font-weight: 500;
+    font-size: 13px;
+    height: 40px;
+    background: #0e8ce4;
+    border: 0;
+    color: #fff;
+    width: 229px;
+    margin-top: 15px;
+    float: right;
+    cursor: pointer;
+}
+.product-customer-col-4 button:hover {
+    opacity: 0.8;
+}
+.has-feedback {
+    position: relative;
+}
+.product-customer-col-4 .title {
+    margin: 0 0 17px;
+    font-size: 16px;
+}
+.product-customer-col-4 .review-content.has-error {
+    margin: 0 0 8px;
+}
+.product-customer-col-4 .review-content {
+    margin: 0 0 24px;
+    font-size: 16px;
+}
+.has-feedback {
+    position: relative;
+}
+.product-customer-col-5 {
+    min-height: 316px;
+    display: block;
+    background-color: white;
+    float: left;
+    padding: 0 20px 0 30px;
+    margin-top: 0;
+}
+.product-customer-col-5 .product-detail {
+    margin-bottom: 40px;
+}
+.product-customer-col-5 .product-detail .image {
+    display: inline-block;
+    float: left;
+}
+.product-customer-col-5 .product-detail .image img {
+    width: 182px;
+}
+.product-customer-col-5 .product-detail .info {
+    margin-left: 210px;
+}

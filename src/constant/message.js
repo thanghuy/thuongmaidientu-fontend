@@ -1,0 +1,10 @@
+export const EmptyInput = "Thông tin bắt buộc *";
+export const RuleUser = "Họ tên phải từ 2-50 ký tự";
+export const RuleUser1 = "Họ tên không được nhập số";
+export const Rulepass = "Mật khẩu phải từ 6 ký tự trở lên"
+export const RulePhoneNumber = "Số điện thoại không hợp lệ";
+export const RulePhoneAlready = "Số điện thoại đã được đăng ký";
+export const RuleRePass = "Mật khẩu không khớp mời nhập lại !!!";
+export const AddCart = "Bạn đã thêm vào giỏ hàng thành công";
+export const DeleteCart = "Bạn có chắc chắn muốn xóa sản phẩm này";
+export const DeleteAllCart = "Bạn có muốn xóa tất cả giỏ hàng";

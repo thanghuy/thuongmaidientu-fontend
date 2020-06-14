@@ -1,0 +1,288 @@
+.main-sidebar{
+    top: 57px !important;
+    width: 15.5% !important;
+    background-color: white;
+    box-shadow: 0px 0px 1px rgb(148, 148, 148);
+}
+.content-wrapper {
+    margin-left: 16% !important;
+}
+.container-fluid{
+    background-color: #f2f3f5 !important;
+    padding-left: 5px !important;
+    padding-right: 10px !important;
+}
+.makeStyles-title-2{
+    color: black;
+}
+.main-header{
+    margin-left: 0px !important;
+}
+.card{
+    margin-top: 10px !important;
+    margin-bottom: 0px !important;
+}
+.nav-item-admin{
+    margin-left: 15px !important;
+    margin-top: 20px;
+    text-align: left;
+}
+.nav-link{
+    float: left;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px !important;
+}
+.nav-item-admin i {
+    color: rgb(38, 148, 192);
+    line-height: 35px;
+    float: left;
+    font-size: 15px;
+}
+.dropdown-menu-admin {
+    margin-top: 40px;
+}
+.list-group-item{
+    font-size: 15px;
+    background: white !important;
+}
+.active-mn-left{
+    color: rgb(1, 178, 248) !important;
+}
+/*product-admin*/
+.product_admin{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    background: white;
+}
+#product-admin1{
+    margin-top: 20px !important;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+/* .order-admin{
+    
+} */
+.table-admin{
+    padding-bottom: 20px;
+}
+.list-order{
+    border: 1px solid rgb(223, 223, 223);
+}
+.name-user{
+    float: left;
+    width: 18%;
+}
+.name-user span {
+    float: right;
+}
+.MuiAvatar-root {
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+.id-order-user{
+    float: right;
+}
+.order-detaile-admin td{
+    height: 130px;
+    vertical-align: middle;
+}
+.order-detaile-admin td:nth-child(1){
+    width: 50%;
+}
+.order-detaile-admin td:nth-child(2){
+    width: 20%;
+}
+.order-detaile-admin td:nth-child(3){
+    width: 18%;
+}
+.order-detaile-admin td:nth-child(4){
+    width: 12%;
+}
+
+.img-order-admin{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.img-order-admin img{
+    width: 20%;
+    float: left;
+    height: 130px;
+}
+.img-order-admin p {
+    margin-left: 5px;
+    margin-top: 25px;
+    width: 73%;
+    float: left;
+}
+.comfirm-order-admin{
+    background: #eb5008;
+    border: none;
+    border-radius: 10px;
+    height: 35px;
+    color: white;
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 3px;   
+    cursor: pointer;
+}
+.comfirm-order-admin-h{
+    background: #eb5008;
+    border: none;
+    border-radius: 10px;
+    height: 35px;
+    color: white;
+    width: 65%;
+    margin-top: 3px;
+    margin-bottom: 3px;   
+    margin-left: 20px;
+    cursor: pointer;
+}
+.comfirm-order-admin-h i{
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+/*custom - add - new - book*/
+
+.add-new-main {
+    padding: 20px 60px 10px 50px;
+    border-bottom: 10px solid #f2f3f2;
+}
+.add-new-main h4 {
+    margin-bottom: 50px;
+}
+.add-new-main .image-main-admin{
+    float: left;
+    text-align: center;
+}
+.add-new-main .image-main-admin span{
+    color: gray;
+    font-size: 15px;
+}
+.custom-file-upload {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px dashed #279fe6;
+    background-color: #f2f3f5;
+    border-radius: 2px;
+    margin-bottom: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+.photo-upload{
+    display: none;
+}
+.img-wrap{
+    position: relative;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+}
+.img-wrap img {
+    width: 100%;
+}
+.img-upload:before{
+    content: "\f093";
+    font-size: 30px;
+    position: absolute;
+    padding-top: 80px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #63d3a6;
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #fff;
+  }
+  .img-upload:hover:before{
+   opacity: 1;
+  }
+  .btn-primary{
+      cursor: pointer;
+  }
+  .is-invalid-feedback{
+      margin-top: 5px;
+      color: #dc3545;
+  }
+  .form-control{
+      color: #333;
+  }
+.add-new-main > .form-group{
+    margin-bottom: 30px !important;
+}
+.title-admin-addnew{
+    text-align: right;
+    color: #505050;
+    font-weight: 100 !important;
+}
+.all-admin-product table{
+    border: 1px solid #e9ecef;
+}
+.all-admin-list-product td{
+    height: 100px;
+    vertical-align: middle;
+}
+.all-admin-list-product td:nth-child(1){
+    width: 35%;
+}
+.all-admin-list-product td:nth-child(2){
+    width: 20%;
+}
+.all-admin-list-product td:nth-child(3){
+    width: 15%;
+}
+.all-admin-list-product td:nth-child(4){
+    width: 10%;
+}
+.all-admin-list-product td:nth-child(5){
+    width: 10%;
+}
+.all-admin-list-product td:nth-child(6){
+    width: 10%;
+}
+.img-all-admin{
+    width: 100%;
+    height: 100%;
+}
+.img-all-admin img{
+    width: 20%;
+    float: left;
+    height: 100px;
+}
+.img-all-admin p {
+    margin-left: 5px;
+    width: 73%;
+    float: left;
+}
+.img-all-admin{
+    cursor: pointer;
+}
+.update-product-admin{
+    background: #ffffff;
+    border: 1px solid #aaaaaa;
+    height: 35px;
+    color: black;
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 3px;   
+    cursor: pointer;
+}
+.rdw-editor-wrapper {
+    border: 1px solid #cacaca;
+    border-radius: 4px;
+}
+/*end*/
+
+
+/*chart*/
+.chart-admin{
+    margin-top: 10px;
+}

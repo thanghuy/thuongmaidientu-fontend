@@ -3,12 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.53",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.7.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "add": "^2.0.6",
+    "antd": "^4.2.4",
+    "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
+    "nuka-carousel": "^4.7.0",
+    "oidc-client": "^1.10.1",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-hook-form": "^5.7.2",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +47,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "eslint-plugin-react-hooks": "^4.0.3",
+    "style-loader": "^1.2.1"
   }
 }

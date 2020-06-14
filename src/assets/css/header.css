@@ -1,0 +1,16 @@
+.cateory-form-sreach{
+    width:78%;
+    height:36px;
+    border: 0;
+    outline:0px;
+    font-size: 100%;
+    margin: 0 auto;
+    padding-left: 5px;
+    cursor:pointer;
+}
+.cateory-form-sreach option{
+    text-align: right;
+    min-height: 1.2em;
+    white-space: nowrap;
+    font-size: 15px;
+}
