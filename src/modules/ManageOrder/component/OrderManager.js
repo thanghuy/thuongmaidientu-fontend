@@ -5,16 +5,57 @@ import FormatNumber from '../../../utils/FormatNumber';
 import * as url from '../../../constant/config';
 import CallApi from '../../../utils/Api5004';
 const OrderManager = (props) => {
-    const [showBt,setShowBt] = useState(true)
-    const setStatusOrder = (id) =>{
-        // var token = localStorage.getItem("token");
-        // var resp = await CallApi("/order/"+id,"PUT",token,2);
-        setShowBt(false)
-        props.setListOrderItem(id)
+    const [showBt,setShowBt] = useState(true);
+    const setStatusOrder = async (id,status) =>{
+        try {
+            var token = localStorage.getItem("token");
+            await CallApi("/order/"+id,"PUT",token,status);
+            setShowBt(false)
+            props.setListOrderItem()
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
+    const showStatus =(orderId)=>{
+        var {status} = props;
+        var result = null;
+        if(status === 1){
+            result = (
+                <td>
+                    <button type="button" className="comfirm-order-admin" 
+                    onClick={()=>setStatusOrder(orderId,2)}
+                    >Chuẩn bị hàng</button>
+                    <button type="button" className="comfirm-order-admin-h" 
+                    onClick={()=>setStatusOrder(orderId,4)}><i className="fas fa-trash-alt"/>Hủy</button>
+                </td>
+            )
+        }
+        if(status === 2){
+            result=(
+                <td>
+                    <button type="button" className="comfirm-order-admin-h">Đang giao</button>
+                </td>
+            )
+        }
+        if(status === 3){
+            result=(
+                <td>
+                    <button type="button" className="comfirm-order-admin-h">Thành công</button>
+                </td>
+            )
+        }
+        if(status === 4){
+            result=(
+                <td>
+                    <button type="button" className="comfirm-order-admin-h">Đã hủy</button>
+                </td>
+            )
+        }
+        return result
+    } 
     const showOrderItems =()=>{
         var {orderItems,statusOrder} = props;
-        var btItem = showBt ? "block" : "none"; 
         var result = null;
         result = orderItems.map((item,index)=>{
             var img = url.urlImg + item.image;
@@ -30,15 +71,17 @@ const OrderManager = (props) => {
                         </td>
                         <td><span className="price">{FormatNumber(item.bookPrice)}</span></td>
                         <td><span className="status_order">{statusOrder}</span></td>
-                        <td>
+                        {/* <td>
                             <button type="button" className="comfirm-order-admin" 
-                            onClick={()=>setStatusOrder(orderId)} style={{display : btItem}}
+                            onClick={()=>setStatusOrder(orderId,2)} style={{display : btItem}}
                             >Chuẩn bị hàng</button>
-                            <button type="button" className="comfirm-order-admin-h" style={{display : btItem}} onClick={()=>setStatusOrder(orderId)}><i className="fas fa-trash-alt"/>Hủy</button>
+                            <button type="button" className="comfirm-order-admin-h" style={{display : btItem}} 
+                            onClick={()=>setStatusOrder(orderId,4)}><i className="fas fa-trash-alt"/>Hủy</button>
                             <button type="button" className="comfirm-order-admin" 
                             style={{display : btItem}}
                             >Thành công</button>
-                        </td>
+                        </td> */}
+                        {showStatus(orderId)}
                     </tr>
                 </tbody>
             )

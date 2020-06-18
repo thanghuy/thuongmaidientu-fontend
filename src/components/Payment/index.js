@@ -1,42 +1,12 @@
 import React, { Component } from 'react';
 import '../../assets/css/payment.css';
 import Visa from './FormVisa';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+const stripePromise = loadStripe("pk_test_6o7pM7P9hjj5QYA9LanEBQai00ZlaGAWPH");
 class index extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeForm1 : false,
-            activeForm2 : false,
-            activeBt : false
-        }
-    }
-    paymentN = ()=>{
-        this.setState({
-            activeForm1 : false,
-            activeForm2 : false
-        })
-    }
-    activeForm1 =()=>{
-        this.setState({
-            activeForm1 : true,
-            activeForm2 : false
-        })
-    }
-    setMomo = () =>{
-        this.setState({
-            activeForm1 : false,
-            activeForm2 : true
-        })  
-    }
     render() {
-        var {activeForm1,activeForm2} = this.state;
-        var showFrom = "";
-        if(activeForm1 === true && activeForm2 === false){
-            showFrom = (
-                <Visa/>
-            )
-        }
-        var activeBt = activeForm1 === true || activeForm2 === true ? "" : "active-mtpm";
+        var {dataAddress} = this.props;
         return (
             <div className="col-lg-12">
                 <div className="cart_container">
@@ -44,16 +14,15 @@ class index extends Component {
                         <div className="row">
                             <div className="list-mtpm col-12">
                                 <span>
-                                    <button type="button" className={`btn-mtpm ${activeBt}`} onClick={this.paymentN}>Thanh toán khi nhận hàng</button>
-                                </span>
-                                <span>
-                                    <button type="button" className={`btn-mtpm ${activeForm1 ? "active-mtpm" : ""}`} onClick={this.activeForm1}>Thanh toán qua thẻ ATM</button>
+                                    <button type="button" className="btn-mtpm active-mtpm">Thanh toán qua thẻ ATM</button>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                {showFrom}
+                <Elements stripe={stripePromise}>
+                    <Visa dataAddress={dataAddress}/>
+                </Elements>
             </div>
         );
     }

@@ -7,7 +7,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import CallApi from '../../../utils/ApiController';
 import FormatNumber from '../../../utils/FormatNumber';
 import * as UrlImg from '../../../constant/config';
-// import {Link} from "react-router-dom";z
+import {Link} from "react-router-dom";
+import Loadings from '../../../common/loading/loadingUpdate';
   const useStyles = makeStyles({
     root: {
       flexGrow: 1,
@@ -16,6 +17,7 @@ import * as UrlImg from '../../../constant/config';
   const AllProduct = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
+  const [Loading , setLoading] = useState(true)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -25,6 +27,7 @@ import * as UrlImg from '../../../constant/config';
     page : 1
   })
   const getAllProduct = (page) =>{
+    setLoading(true)
     var user = JSON.parse(localStorage.getItem("userName"));
       CallApi("/book?userid="+user.sub+"&current="+page+"&pageSize=10","GET",null,null).then(resp =>{
         setState(prev =>({
@@ -33,6 +36,7 @@ import * as UrlImg from '../../../constant/config';
           totalPage : resp.data.totalPage,
           page : resp.data.current
         }))
+        setLoading(false)
       })
   }
   useEffect(() => {
@@ -58,7 +62,7 @@ import * as UrlImg from '../../../constant/config';
               <td>{product.amount}</td>
               <td>x</td>
               <td>
-                  <button type="button" className="update-product-admin">Sửa</button>
+                  <Link to={`/san-pham/update-product/${product.bookId}`}><button type="button" className="update-product-admin">Sửa</button></Link>
                   <button type="button" className="update-product-admin">Xóa</button>
               </td>
             </tr>
@@ -71,45 +75,50 @@ import * as UrlImg from '../../../constant/config';
       getAllProduct(value)
     };
     var {totalPage,page} = state;
-    return (
-        <div className="product_admin">
-            <Paper className={classes.root}>
-              <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  
-              >
-                  <Tab label="Tất cả" />
-                  <Tab label="Còn hàng" />
-                  <Tab label="Hết hàng" />
-                  <Tab label="Đã khóa" />
-                  <Tab label="Đã ẩn" />
-              </Tabs>
-          </Paper>
-          <div className="row">
-            <div className="col-lg-12 add-new-main all-admin-product">
-              <table className="table">
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col" style={{width : "35%"}}>Tên sản phẩm</th>
-                    <th scope="col" style={{width : "20%"}}>Danh mục</th>
-                    <th scope="col" style={{width : "15%"}}>Giá</th>
-                    <th scope="col" style={{width : "10%"}}>Số lượng</th>
-                    <th scope="col" style={{width : "10%"}}>Hiển thị</th>
-                    <th scope="col" style={{width : "10%"}}>Thao tác</th>
-                  </tr>
-                </thead>
-                <tbody>{showAllProduct()}</tbody>
-              </table>
-              <div className="col-5 float-right">
-                  <Pagination count={totalPage} page={page} onChange={setPageProduct} color="primary" variant="outlined" shape="rounded"/>
+    if(Loading){
+      return ( <Loadings load="block" /> )
+    }
+    else{
+      return (
+          <div className="product_admin">
+              <Paper className={classes.root}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    
+                >
+                    <Tab label="Tất cả" />
+                    <Tab label="Còn hàng" />
+                    <Tab label="Hết hàng" />
+                    <Tab label="Đã khóa" />
+                    <Tab label="Đã ẩn" />
+                </Tabs>
+            </Paper>
+            <div className="row">
+              <div className="col-lg-12 add-new-main all-admin-product">
+                <table className="table">
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col" style={{width : "35%"}}>Tên sản phẩm</th>
+                      <th scope="col" style={{width : "20%"}}>Danh mục</th>
+                      <th scope="col" style={{width : "15%"}}>Giá</th>
+                      <th scope="col" style={{width : "10%"}}>Số lượng</th>
+                      <th scope="col" style={{width : "10%"}}>Hiển thị</th>
+                      <th scope="col" style={{width : "10%"}}>Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody>{showAllProduct()}</tbody>
+                </table>
+                <div className="col-5 float-right">
+                    <Pagination count={totalPage} page={page} onChange={setPageProduct} color="primary" variant="outlined" shape="rounded"/>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-    );
+      );
+    }
 };
 
 export default AllProduct;

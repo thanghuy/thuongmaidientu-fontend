@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import ImgProduct from './ImgProduct';
 import InforProduct from '../components/DetailsItem/InforProduct';
-import DetailPro from '../components/DetailsItem/productDetails';
+import InforShop from '../components/DetailsItem/InforShop';
 import ProductReview from '../components/DetailsItem/productReviews';
 import '../assets/css/detailProduct.css';
 import '../assets/css/detail_reponsive.css';
@@ -26,19 +26,19 @@ class Detailitem extends Component {
     }
     componentDidMount(){
         var {match} = this.props;
-        let idBook = match.params.id;
+        var idBook = match.params.id;
         this.getDataDetail(idBook)
     }
     render() {
         var {match} = this.props;
-        let idBook = match.params.id;
+        var idBooks = match.params.id;
         if(!this.state.loading) {
             return (
                 <div className="col-12">
                     <div className="container">
                         <InforProduct OneProduct={this.state.OneProduct}/>
-                        {/* <DetailPro OneProduct={this.state.OneProduct}/> */}
-                        <ProductReview OneProduct={this.state.OneProduct} idBook={idBook}/>
+                        <InforShop OneProduct={this.state.OneProduct}/>
+                        <ProductReview OneProduct={this.state.OneProduct} idBook={idBooks}/>
                     </div>
                 </div>
             );
@@ -47,7 +47,7 @@ class Detailitem extends Component {
             return(
                 <div className="col-12">
                     <div className="container detail_content_container">
-                        <SekeletonDeatail/>
+                        <SekeletonDeatail />
                     </div>
                 </div>
             )

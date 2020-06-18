@@ -286,3 +286,14 @@
 .chart-admin{
     margin-top: 10px;
 }
+.MuiAppBar-colorPrimary {
+    color: #000000 !important;
+    margin-left: 4px;
+    background-color: #ffffff !important;
+}
+.MuiButton-containedSecondary:hover {
+    opacity: 0.9;
+}
+.MuiButton-containedPrimary{
+    background-color: #0e8ce4 !important; 
+}

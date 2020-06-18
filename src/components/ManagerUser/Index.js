@@ -4,6 +4,7 @@ import avatar from '../../assets/images/avatar.png'
 import {Route,Link} from 'react-router-dom'
 import Order from './Order/indexOrder';
 import InforUser from './InfoUser';
+import NotFound from '../../common/Empty/Empty';
 const menus = [
     {
         name : 'Tài khoản của tôi',
@@ -64,7 +65,7 @@ const Index =(props)=>{
         switch(params){
             case 'order' : result = (<Order/>) ; break;
             case 'profile' : result = (<InforUser/>) ;break;
-            default : return 0;
+            default : result = (<NotFound message="Chức năng chưa hoàn thiên" />);
         }
         return result;
     }

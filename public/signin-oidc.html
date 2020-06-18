@@ -4,13 +4,25 @@
 <head>
     <title>Authentification callback processing..</title>
 </head>
-
+<style>
+    .loading-login-main {
+        position: absolute;
+        top: 30%;
+        left: 43%;
+        background: red;
+    }
+    .loading-login-main img {
+        width: 250px;
+        height: 200px;
+    }
+</style>
 <body>
     <noscript>
         You need to enable JavaScript to run this app.
     </noscript>
-
-    <h1>Authentification callback processing...</h1>
+    <img class="loading-login-main">
+        <img src="../src/assets/images/loading.gif" alt="loadingupdate"></img>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.8.2/oidc-client.js"></script>
     <script>

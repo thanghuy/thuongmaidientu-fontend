@@ -15,10 +15,10 @@ class TopBar extends Component {
             dataUser : ""
         }
     }
-    getCart = (idUser,token) =>{
+    getCart = (token) =>{
         CallAPi("cart/","GET",null,token).then(resp =>{
             this.props.UpdateCartRed(resp.data.data.items)
-        })   
+        })
     }
     getUserOidc = async () => {
         var res = await authService.getUser();
@@ -32,7 +32,7 @@ class TopBar extends Component {
             this.setCookie(res.access_token)
             // this.props.UpdateCartRed()
             this.props.UpdateUser(res.profile)
-            this.getCart(res.profile.sub,res.access_token)
+            this.getCart(res.access_token)
 
         }
         else{

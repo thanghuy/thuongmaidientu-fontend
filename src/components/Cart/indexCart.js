@@ -8,8 +8,10 @@ import * as URL from '../../constant/config';
 import { connect } from 'react-redux';
 import * as action from '../../action/addCart';
 import CallApi from '../../utils/ApiToken';
-import axios from "axios";
 import LoadingUpdate from '../../common/loading/loadingUpdate';
+import SekeletonCart from '../../common/Sekeleton/sekeletonCart';
+import CallApi5003 from '../../utils/api5003';
+import CartEmpty from '../../components/Cart/CartEmpty';
 class index extends Component { 
     constructor(props){
         super(props);
@@ -22,15 +24,17 @@ class index extends Component {
             deleteAll : false,
             quantity : 1,
             totalItem : 0,
-            loading : false
+            loading : false,
+            Sekeleton : true
         }
     }
     getCart = () =>{
         var userID = JSON.parse(localStorage.getItem('userName'));
         if(userID !== null){
             var token = localStorage.getItem('token');
-            return CallApi('cart/',"GET",null,token).then(resp =>{
+            CallApi('cart/',"GET",null,token).then(resp =>{
                 this.props.UpdateCartRed(resp.data.data.items)
+                this.setState({Sekeleton : false})
             })
         }
     }
@@ -54,7 +58,7 @@ class index extends Component {
         if(data !== ""){
             this.setState({loading : true})
             var token = localStorage.getItem('token');
-            return CallApi('cart/',"PUT",data,token).then(resp =>{
+            CallApi('cart/',"PUT",data,token).then(resp =>{
                 this.props.UpdateCartRed(resp.data.data.items)
                 this.setState({loading : false})
             })
@@ -62,7 +66,7 @@ class index extends Component {
     }
     delete(id){
         var token = localStorage.getItem('token');
-        return CallApi('cart/',"DELETE",id,token).then(resp =>{
+        CallApi('cart/',"DELETE",id,token).then(resp =>{
             this.setState({
                 activeDe : false
             })  
@@ -125,18 +129,10 @@ class index extends Component {
         })
     }
     checkAddress = async ()=>{
+        this.setState({loading : true})
         var token = localStorage.getItem("token");
-        //var userName = JSON.parse(localStorage.getItem("userName"))
-        var resp = await axios({
-            method : "GET",
-            url : "https://localhost:5003/api/addressuser/",
-            headers: {
-                Authorization:"Bearer " + token,
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
-            }, 
-            data : null
-        });
+        var resp = await CallApi5003("/addressuser","GET",token,null);
+        this.setState({loading : false})
         if(resp.data.data.length === 0){
             this.props.history.push("/new-address")
         }
@@ -202,70 +198,78 @@ class index extends Component {
             );
         });
         }
-        return (
-            <div className="col-12">
-                <div className="confirm-de" style={{display : active}}>
-                    <div className="md-delete container">
-                        <div className="md-delete-tilte">{messageComfirm}</div>
-                        <div>
-                            <button className="md-delete-bt" type="button" onClick={this.comfirmDe}>Xác nhận</button>
-                            <button className="md-delete-bt" type="button" onClick={this.closeDe}>Không</button>
+        if(this.state.Sekeleton){
+            return (<div className="container cart_section"> <SekeletonCart/></div>)
+        }
+        else if(dataCart.length > 0){
+            return (
+                <div className="col-12">
+                    <div className="confirm-de" style={{display : active}}>
+                        <div className="md-delete container">
+                            <div className="md-delete-tilte">{messageComfirm}</div>
+                            <div>
+                                <button className="md-delete-bt" type="button" onClick={this.comfirmDe}>Xác nhận</button>
+                                <button className="md-delete-bt" type="button" onClick={this.closeDe}>Không</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="cart_section">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-12">
-                                <nav aria-label="breadcrumb">
-                                    <ol className="breadcrumb chea-01">
-                                        <li className="breadcrumb-item">
-                                            <label className="container-check">
-                                                <input 
-                                                type="checkbox"
-                                                name="checkProduct" 
-                                                defaultChecked="checked"
-                                                />
-                                                <span className="checkmark" style={{marginTop : "8px",marginLeft : "27px"}}></span>
-                                            </label>
-                                        </li>
-                                        <li className="breadcrumb-tiem">Chọn tất cả sản phẩm</li>
-                                        <li className="breadcrumb-tiem"></li>
-                                        <li className="breadcrumb-tiem"></li>
-                                        <li className="breadcrumb-tiem"><i className="fas fa-trash-alt" onClick={this.deleteAllCart}/></li>
-                                        <li className="breadcrumb-tiem">Xác nhận</li>
-                                    </ol>
-                                </nav>
+                    <div className="cart_section">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-12">
+                                    <nav aria-label="breadcrumb">
+                                        <ol className="breadcrumb chea-01">
+                                            <li className="breadcrumb-item">
+                                                <label className="container-check">
+                                                    <input 
+                                                    type="checkbox"
+                                                    name="checkProduct" 
+                                                    defaultChecked="checked"
+                                                    />
+                                                    <span className="checkmark" style={{marginTop : "8px",marginLeft : "27px"}}></span>
+                                                </label>
+                                            </li>
+                                            <li className="breadcrumb-tiem">Chọn tất cả sản phẩm</li>
+                                            <li className="breadcrumb-tiem"></li>
+                                            <li className="breadcrumb-tiem"></li>
+                                            <li className="breadcrumb-tiem"><i className="fas fa-trash-alt" onClick={this.deleteAllCart}/></li>
+                                            <li className="breadcrumb-tiem">Xác nhận</li>
+                                        </ol>
+                                    </nav>
+                                </div>
                             </div>
-                        </div>
-                        <div className="row main-cart">
-                            <div className="col-lg-9">
-                                {result}
-                            </div>
-                            <div className="col-3">
-                                <div className="container-right">
-                                    <div className="card-body">
-                                        <h4><i className="fas fa-calendar-check"/>&ensp;Thông tin đơn hàng</h4>
-                                    </div>
-                                    <div className="cart-right-main01">
-                                        <hr />
-                                        <p>
-                                        <span className="-ncrt001">Tạm tính:</span> <span className="price-cartm">{FormatNumber(total)}</span>
-                                        </p>
-                                        <hr />
-                                        <p>
-                                        Tổng tiền:
-                                            <span className="price-cart-total">{FormatNumber(total)}</span>
-                                        </p>
-                                        <button className="btn-cart" type="button" onClick={this.checkAddress}>Xác nhận giỏ hàng</button>
+                            <div className="row main-cart">
+                                <div className="col-lg-9">
+                                    {result}
+                                </div>
+                                <div className="col-3">
+                                    <div className="container-right">
+                                        <div className="card-body">
+                                            <h4><i className="fas fa-calendar-check"/>&ensp;Thông tin đơn hàng</h4>
+                                        </div>
+                                        <div className="cart-right-main01">
+                                            <hr />
+                                            <p>
+                                            <span className="-ncrt001">Tạm tính:</span> <span className="price-cartm">{FormatNumber(total)}</span>
+                                            </p>
+                                            <hr />
+                                            <p>
+                                            Tổng tiền:
+                                                <span className="price-cart-total">{FormatNumber(total)}</span>
+                                            </p>
+                                            <button className="btn-cart" type="button" onClick={this.checkAddress}>Xác nhận giỏ hàng</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else{
+            return (<CartEmpty/>)
+        }
     }
 }
 const mapStateToProps = state => {

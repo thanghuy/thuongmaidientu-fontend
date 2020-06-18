@@ -4,6 +4,7 @@ import AddCart from './addCart';
 import UserName from './userName';
 import Address from './address';
 import ActiveMenu from './MenuAdmin';
+import AddOrderItem from './CheckPayment';
 const appReducers = combineReducers({
     status : status,
     dataUser : status,
@@ -11,6 +12,7 @@ const appReducers = combineReducers({
     activeForm : AddCart,
     userName : UserName,
     dataAddress : Address,
-    ActiveMenu
+    ActiveMenu,
+    AddOrderItem
 });
 export default appReducers;

@@ -49,7 +49,7 @@ const DetailOrder = (props) => {
                 </div>
             </td>
             <td>
-                <Link to={`/comment/${OrderId}/${orderIteam.slug}.${orderIteam.bookId}`} className={disabled}>
+                <Link to={`/comment/${orderIteam.orderItemId}/${orderIteam.slug}.${orderIteam.bookId}`} className={disabled}>
                   <span className="product-review">Viết nhận xét</span>
                 </Link>
             </td>
@@ -138,7 +138,7 @@ const DetailOrder = (props) => {
   const setStatusOrder = async (id) =>{
     try {
       var token = localStorage.getItem("token");
-      var resp = await CallApi("/order/"+id,"PUT",token,3);
+      await CallApi("/order/"+id,"PUT",token,3);
       props.setDataOrderItem()
     } catch (error) {
       console.log(error)

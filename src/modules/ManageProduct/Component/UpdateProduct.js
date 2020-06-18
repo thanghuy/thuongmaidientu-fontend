@@ -10,7 +10,9 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AppBar from '@material-ui/core/AppBar';
-const AddNewProduct = () => {
+import {withRouter} from 'react-router-dom';
+import * as Url from '../../../constant/config';
+const AddNewProduct = (props) => {
     const [listImg, setListImg] = useState({ 
         imageMain : "",
         image1 : "",
@@ -21,6 +23,22 @@ const AddNewProduct = () => {
         addSuccess : false,
         slug : ""
     })
+    const [Product,setProduct] = useState(null);
+    const getDataDetail = () =>{
+        var {match} = props;
+        let idBook = match.params.idProduct;
+        CallApi("/book/"+idBook,"GET",null).then(resp =>{
+            setListImg(prev => ({ 
+                ...prev,
+                imageMain: Url.urlImg + resp.data.data.imagePath,
+                image1 : Url.urlImg + resp.data.data.imagePaths[1],
+                image2 : Url.urlImg + resp.data.data.imagePaths[2],
+                image3 : Url.urlImg + resp.data.data.imagePaths[3],
+                image4 : Url.urlImg + resp.data.data.imagePaths[4]
+            }))
+            setProduct(resp.data.data)
+        })
+    }
     const [category,setCategory] = useState(null);
     const { register, handleSubmit, errors } = useForm();
     const getData = () =>{
@@ -29,8 +47,9 @@ const AddNewProduct = () => {
         })
     }
     useEffect(() => {
+        getDataDetail()
         getData()
-    }, [])
+    })
     const addNewProduct = (data) =>{
         setListImg(prev =>({
             ...prev,
@@ -71,7 +90,7 @@ const AddNewProduct = () => {
             let img = event.target.files[0];
             setListImg(prev => ({ 
                 ...prev,
-                [name]: img,
+                [name]: URL.createObjectURL(img),
             }))
         }
     };
@@ -83,12 +102,12 @@ const AddNewProduct = () => {
             slug: slug
         }))
     }
-    var {imageMain,image1,image2,image3,image4,addSuccess,loading,slug} = listImg;
-    var img0 = imageMain === "" ? imgUpload : URL.createObjectURL(imageMain);
-    var img1 = image1 === "" ? imgUpload : URL.createObjectURL(image1);
-    var img2 = image2 === "" ? imgUpload : URL.createObjectURL(image2);
-    var img3 = image3 === "" ? imgUpload : URL.createObjectURL(image3);
-    var img4 = image4 === "" ? imgUpload : URL.createObjectURL(image4);
+    var {imageMain,image1,image2,image3,image4,addSuccess,loading} = listImg;
+    var img0 = imageMain === "" ? imageMain : imageMain;
+    var img1 = image1 === Url.urlImg + "undefined" ? imgUpload : image1;
+    var img2 = image2 === Url.urlImg + "undefined" ? imgUpload : image2;
+    var img3 = image3 === Url.urlImg + "undefined" ? imgUpload : image3;
+    var img4 = image4 === Url.urlImg + "undefined" ? imgUpload : image4;
     const showCategory = () =>{
         var result = "";
         if(category !== null){
@@ -98,7 +117,7 @@ const AddNewProduct = () => {
         }
         return result
     }
-    if(!addSuccess){
+    if(!addSuccess && Product !== null){
     return (
         <div className="product_admin">
             <LoadingUpdate load={loading ? "block" : "none"}/>
@@ -112,6 +131,7 @@ const AddNewProduct = () => {
                                 <input
                                 name="name"
                                 type="text"
+                                defaultValue={Product.name}
                                 onChange={setSlug}
                                 ref={register({required : true ,minLength: 10})}
                                 className="form-control"
@@ -134,7 +154,7 @@ const AddNewProduct = () => {
                                 <input
                                 name="slug"
                                 type="text"
-                                defaultValue={slug}
+                                defaultValue={Product.slug}
                                 ref={register({required : true ,minLength: 10})}
                                 className="form-control"
                                 />
@@ -156,7 +176,7 @@ const AddNewProduct = () => {
                                 <textarea
                                 className="form-control"
                                 rows={8}
-                                defaultValue={""}
+                                defaultValue={Product.content}
                                 name="content"
                                 ref={register({required : true ,minLength: 0})}
                                 />
@@ -183,6 +203,7 @@ const AddNewProduct = () => {
                                 type="text"
                                 className="form-control"
                                 name="publisher"
+                                defaultValue={Product.publisher}
                                 ref={register({required : true})}
                                 />
                                 {errors.publisher && errors.publisher.type === "required" &&(
@@ -198,6 +219,7 @@ const AddNewProduct = () => {
                                 <input
                                 type="text"
                                 name="author"
+                                defaultValue={Product.author}
                                 className="form-control"
                                 ref={register({required : true})}
                                 />
@@ -218,6 +240,7 @@ const AddNewProduct = () => {
                                 type="text"
                                 className="form-control"
                                 name="amount"
+                                defaultValue={Product.amount}
                                 ref={register({required : true})}
                                 />
                                 {errors.amount && errors.amount.type === "required" &&(
@@ -234,6 +257,7 @@ const AddNewProduct = () => {
                                 type="text"
                                 className="form-control"
                                 name="price"
+                                defaultValue={Product.price}
                                 ref={register({required : true})}
                                 />
                                  {errors.price && errors.price.type === "required" &&(
@@ -319,7 +343,7 @@ const AddNewProduct = () => {
                                     type="submit"
                                     className="mr-3"
                                     startIcon={<SaveIcon />}
-                                >Thêm mới</Button>
+                                >Cập nhập</Button>
                             </div>
                         </div>
                     </AppBar>
@@ -338,4 +362,4 @@ const AddNewProduct = () => {
     }
 };
 
-export default AddNewProduct;
+export default withRouter(AddNewProduct);

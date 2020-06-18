@@ -252,7 +252,6 @@
     line-height: 80px;
 }
 .list-mtpm span{
-	margin-left: 10px;
 	margin-right: 20px;
 	position: relative;
 }
@@ -370,3 +369,11 @@
 	margin-bottom: 0rem !important;
 }
 .tableFixHead{ overflow-y: auto; height: 422px; border: 1px solid rgb(230, 230, 230);}
+.StripeElement--webkit-autofill {
+  background: transparent !important;
+}
+
+.StripeElement {
+  width: 100%;
+  padding: 11px 15px 11px 0;
+}

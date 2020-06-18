@@ -1,11 +1,12 @@
 import React ,{useState,useEffect} from 'react';
+import {Link,withRouter} from "react-router-dom";
 import Rating from '@material-ui/lab/Rating';
 import '../../assets/css/comment.css';
 import * as URL from '../../constant/config';
 import CallApi from '../../utils/ApiController';
+import CallApi5004 from '../../utils/Api5004';
 import { useForm } from "react-hook-form";
-import {Link,withRouter} from "react-router-dom";
-import axios from 'axios';
+
 const Index = (props) => {
     const [OneProduct,setOneProduct] = useState("");
     const [rating,setRating]= React.useState(0);
@@ -18,40 +19,33 @@ const Index = (props) => {
     }
     useEffect(() => {
         var {match} = props;
-        let idBook = match.params.id;
-        getDataDetail(idBook)
-    });
+        var idBook = match.params.id;
+        getDataDetail(idBook);
+    },[props]);
     const onSubmitRating =data=>{
         AddRating(data.content)
     }
     const AddRating = async (content)=>{
         if(rating !== 0 && rating > 0){
-            setError1(false)
-            var {match} = props;
-            var OrderId = match.params.OrderId;
-            var BuyerId = JSON.parse(localStorage.getItem("userName"));
-            var  data = {
-                orderItemId : OrderId,
-                BookId : OneProduct.bookId,
-                UserId : OneProduct.userId,
-                BuyerId : BuyerId.sub,
-                Rating : rating,
-                Content : content
-            }
-            console.log(data)
-            var token = localStorage.getItem("token");
-            var resp = await axios({
-                method : "POST",
-                url : "https://localhost:5004/api/rating",
-                headers: {
-                    Authorization:"Bearer " + token,
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'application/json'
-                }, 
-                data : data
-            });
-            if(resp.data.success){
+            try {
+                setError1(false)
+                var {match} = props;
+                var OrderId = match.params.OrderId;
+                var BuyerId = JSON.parse(localStorage.getItem("userName"));
+                var data = {
+                    fullName : BuyerId.Fullname,
+                    orderItemId : OrderId,
+                    BookId : OneProduct.bookId,
+                    UserId : OneProduct.userId,
+                    BuyerId : BuyerId.sub,
+                    Rating : rating,
+                    Content : content
+                }
+                var token = localStorage.getItem("token");
+                await CallApi5004("/rating","POST",token,data);
                 props.history.push(`/product/${OneProduct.slug}.${OneProduct.bookId}.html`)
+            } catch (error) {
+                alert("Bạn đã đánh giá sản phẩm này")
             }
         }
         else{

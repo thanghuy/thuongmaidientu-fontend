@@ -126,7 +126,7 @@ class indexOrder extends Component {
                         <div className="card-body">
                             <h4 className="card-title"><i className="fas fa-credit-card"/>&ensp;Phương thức thanh toán</h4>
                         </div>
-                        <MethodPayment/>
+                        <MethodPayment dataAddress={dataAddress}/>
                     </div>
                 </div>
                     <Order dataCart={this.props.dataCart} dataAddress={dataAddress}/>

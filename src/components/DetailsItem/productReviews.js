@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import img from '../../assets/images/avatar.png';
 import Rating from '@material-ui/lab/Rating';
 import axios from 'axios';
-export default class productReviews extends Component {
+class productReviews extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,7 @@ export default class productReviews extends Component {
     
     showRating =()=>{
         var {OneProduct} = this.props;
-        var result = [];
+        var result = "";
         if(parseInt(OneProduct.rating) > 0){
             result = (
                 <Rating name="read-only" value={parseInt(OneProduct.rating)} readOnly />
@@ -48,7 +48,7 @@ export default class productReviews extends Component {
                         </div>
                         <div className="comment-user">
                             <div className="user-name">
-                                <label className="name-reply">{item.buyerId}</label>
+                                <label className="name-reply">{item.fullName}</label>
                                 <Rating name="read-only" value={item.rating} readOnly />
                                 <label className="time-comment">&ensp;{item.createdDate}</label>
                             </div>
@@ -65,9 +65,6 @@ export default class productReviews extends Component {
         }
         return result
     }
-    // componentWillMount(){
-        
-    // }
     render() {
         var {OneProduct} = this.props;
         return (
@@ -149,3 +146,4 @@ export default class productReviews extends Component {
         )
     }
 }
+export default productReviews

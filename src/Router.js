@@ -17,8 +17,9 @@ import HomeAdmin from './page/AdHome';
 import ManageOrder from './page/AdOrder';
 import AdAllProduct from './page/AdAllProduct';
 import AdAddNewProduct from './page/AdNewProduct';
+import AdUpdateProduct from './page/UpdateProduct';
 import NewAddress from './page/NewAddress';
-import Comment from './page/comment';
+import Comment from './page/Comment';
 import { connect } from 'react-redux';
 class Routes extends Component {
     render(){
@@ -62,6 +63,7 @@ class Routes extends Component {
                             <RouterAdmin key="12" path="/san-pham/all-product" exact component={AdAllProduct}/>
                             <RouterAdmin key="14" path="/quan-ly-shop" exact component={ManageOrder}/>
                             <RouterAdmin key="15" path="/san-pham/add-new-product" exact component={AdAddNewProduct}/>
+                            <RouterAdmin key="16" path="/san-pham/update-product/:idProduct" exact component={AdUpdateProduct}/>
                             <Route path="" exact={false} component={NotFound}/>
                         </Switch>
                     </ScrollToTop>
@@ -84,6 +86,7 @@ class Routes extends Component {
                             <RouterAdmin key="12" path="/san-pham/all-product" exact component={AdAllProduct}/>
                             <RouterAdmin key="14" path="/quan-ly-shop" exact component={ManageOrder}/>
                             <RouterAdmin key="15" path="/san-pham/add-new-product" exact component={AdAddNewProduct}/>
+                            <RouterAdmin key="16" path="/san-pham/update-product/:idProduct" exact component={AdUpdateProduct}/>
                             <Route path="" exact={false} component={NotFound}/>
                         </Switch>
                     </ScrollToTop>
