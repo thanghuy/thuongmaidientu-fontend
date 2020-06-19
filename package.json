@@ -12,7 +12,6 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "add": "^2.0.6",
-    "antd": "^4.2.4",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "oidc-client": "^1.10.1",
