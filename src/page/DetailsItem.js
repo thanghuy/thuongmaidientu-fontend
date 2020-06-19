@@ -7,12 +7,14 @@ import '../assets/css/detailProduct.css';
 import '../assets/css/detail_reponsive.css';
 import CallApi from '../utils/ApiController';
 import SekeletonDeatail from '../common/sekeletonDetailP';
+import axios from 'axios';
 class Detailitem extends Component {
     constructor(props){
         super(props);
         this.state = {
             OneProduct : "",
-            loading : false
+            loading : false,
+            comment : null
         }
     }
     getDataDetail = (idBook) =>{
@@ -24,21 +26,29 @@ class Detailitem extends Component {
             this.setState({loading : false})
         })
     }
+    getComment = async (idBook)=>{
+        var resp = await axios.get("https://localhost:5005/api/comment?bookid="+idBook);
+        var isComment = !!resp;
+        if(isComment){
+            this.setState({
+                comment : resp.data.data
+            })
+        }
+    }
     componentDidMount(){
         var {match} = this.props;
         var idBook = match.params.id;
         this.getDataDetail(idBook)
+        this.getComment(idBook);
     }
     render() {
-        var {match} = this.props;
-        var idBooks = match.params.id;
         if(!this.state.loading) {
             return (
                 <div className="col-12">
                     <div className="container">
                         <InforProduct OneProduct={this.state.OneProduct}/>
                         <InforShop OneProduct={this.state.OneProduct}/>
-                        <ProductReview OneProduct={this.state.OneProduct} idBook={idBooks}/>
+                        <ProductReview OneProduct={this.state.OneProduct} comment={this.state.comment}/>
                     </div>
                 </div>
             );

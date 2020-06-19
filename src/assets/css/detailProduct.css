@@ -375,12 +375,17 @@ display: table;
 	width: 100%;
 	height: 30px;
 	padding:10px 10px 0px 20px;
+	display: flex;
 }
 .name-reply{
-	font-size: 16px;
+	font-size: 14px;
 	padding-right: 20px;
 	font-weight: 600;
 	color: #21a3d6;
+	margin-bottom: 0px;
+}
+span.time-comment{
+	color: #777777;
 }
 .content-comment{
 	width: 100%;

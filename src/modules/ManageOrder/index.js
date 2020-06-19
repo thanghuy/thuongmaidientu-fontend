@@ -25,7 +25,6 @@ export default function CenteredTabs() {
         var user = JSON.parse(localStorage.getItem("userName"));
         var resp = await CallApi("/order/shop/"+ user.sub,"GET",token,null);
         setLoading(false)
-        console.log(resp.data.data)
         setListOrder(resp.data.data)
     }
     const setListOrderItem=()=>{

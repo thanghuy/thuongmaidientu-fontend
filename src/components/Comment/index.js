@@ -6,11 +6,13 @@ import * as URL from '../../constant/config';
 import CallApi from '../../utils/ApiController';
 import CallApi5004 from '../../utils/Api5004';
 import { useForm } from "react-hook-form";
+import LoadingUp from '../../common/loading/loadingUpdate';
 
 const Index = (props) => {
     const [OneProduct,setOneProduct] = useState("");
     const [rating,setRating]= React.useState(0);
     const [error1,setError1] = useState(false);
+    const [load,setLoad] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const getDataDetail = (idBook) =>{
         CallApi("/book/"+idBook,"GET",null,null).then(resp =>{
@@ -27,6 +29,7 @@ const Index = (props) => {
     }
     const AddRating = async (content)=>{
         if(rating !== 0 && rating > 0){
+            setLoad(true)
             try {
                 setError1(false)
                 var {match} = props;
@@ -43,8 +46,11 @@ const Index = (props) => {
                 }
                 var token = localStorage.getItem("token");
                 await CallApi5004("/rating","POST",token,data);
+                setLoad(false)
                 props.history.push(`/product/${OneProduct.slug}.${OneProduct.bookId}.html`)
             } catch (error) {
+                setLoad(false)
+                props.history.push(`/`)
                 alert("Bạn đã đánh giá sản phẩm này")
             }
         }
@@ -66,6 +72,7 @@ const Index = (props) => {
     var Message1 = error1 ? "block" : "none";
     return (
         <div className="container">
+            <LoadingUp load={load ? "block" : "none"} />
             <div className="product-review-comment row">
                 <h3 className="js-customer-h3">Gửi nhận xét của bạn</h3>
                 <div className="product-customer-col-4 col-6">

@@ -61,13 +61,24 @@ class InforProduct extends Component {
         })
     }
     addToCart =() =>{
-        var {userName} = this.props;
+        var {userName,OneProduct,dataCart} = this.props;
+        let status = false;
+        var {quantity} = this.state;
+        dataCart.forEach(item => {
+            if(OneProduct.bookId === item.id ){
+                status = item.amount + quantity > OneProduct.amount ? true : false;
+            }
+        });
         if(userName === null){
             this.setState({
                 showFormComfirm : true
             })
         }
+        else if(status){
+            alert("Số lượng không đủ");
+        }
         else{
+            
             var idUser = JSON.parse(localStorage.getItem('userName'));
             var token = localStorage.getItem('token');
             this.getAddCart(idUser.sub,token);

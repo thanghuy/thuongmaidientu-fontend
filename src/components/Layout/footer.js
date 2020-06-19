@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ImgSend from '../../assets/images/send.png'
 class footer extends Component {
     render() {
         return (
@@ -11,11 +11,11 @@ class footer extends Component {
                   <div className="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
                     <div className="newsletter_title_container">
                       <div className="newsletter_icon">
-                        <img src="images/send.png" alt="send" />
+                        <img src={ImgSend} alt="send" />
                       </div>
-                      <div className="newsletter_title">Sign up for Newsletter</div>
+                      <div className="newsletter_title">Đăng ký nhận thông tin của web</div>
                       <div className="newsletter_text">
-                        <p>...and receive %20 coupon for first shopping.</p>
+                        <p>...Có cơ hội nhận mã khuyến mãi đến 50%.</p>
                       </div>
                     </div>
                     <div className="newsletter_content clearfix">
@@ -24,13 +24,10 @@ class footer extends Component {
                           type="email"
                           className="newsletter_input"
                           required="required"
-                          placeholder="Enter your email address"
+                          placeholder="Nhập gmail của bạn"
                         ></input>
-                        <button className="newsletter_button">Subscribe</button>
+                        <button className="newsletter_button">Đăng ký</button>
                       </form>
-                      <div className="newsletter_unsubscribe_link">
-                        <a href="/">unsubscribe</a>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -44,14 +41,13 @@ class footer extends Component {
                   <div className="footer_column footer_contact">
                     <div className="logo_container">
                       <div className="logo">
-                        <a href="/">OneTech</a>
+                        <a href="/">AliBook</a>
                       </div>
                     </div>
-                    <div className="footer_title">Got Question? Call Us 24/7</div>
                     <div className="footer_phone">+38 068 005 3570</div>
                     <div className="footer_contact_text">
-                      <p>17 Princess Road, London</p>
-                      <p>Grester London NW18JR, UK</p>
+                      <p>273 An dương vương</p>
+                      <p>Thành phố Hồ Chí Minh</p>
                     </div>
                     <div className="footer_social">
                       <ul>

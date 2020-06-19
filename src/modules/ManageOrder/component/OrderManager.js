@@ -4,14 +4,18 @@ import imga from '../../../assets/images/avatar.png'
 import FormatNumber from '../../../utils/FormatNumber';
 import * as url from '../../../constant/config';
 import CallApi from '../../../utils/Api5004';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Loadings from '../../../common/loading/loadingUpdate';
 const OrderManager = (props) => {
-    const [showBt,setShowBt] = useState(true);
-    const setStatusOrder = async (id,status) =>{
+    const [Loading,setLoading] = useState(false);
+    const setStatusOrder = async (id,method,status) =>{
         try {
+            setLoading(true);
             var token = localStorage.getItem("token");
-            await CallApi("/order/"+id,"PUT",token,status);
-            setShowBt(false)
+            await CallApi("/order/"+id,method,token,status);
             props.setListOrderItem()
+            setLoading(false);
         } catch (error) {
             console.log(error)
         }
@@ -23,32 +27,50 @@ const OrderManager = (props) => {
         if(status === 1){
             result = (
                 <td>
-                    <button type="button" className="comfirm-order-admin" 
-                    onClick={()=>setStatusOrder(orderId,2)}
-                    >Chuẩn bị hàng</button>
-                    <button type="button" className="comfirm-order-admin-h" 
-                    onClick={()=>setStatusOrder(orderId,4)}><i className="fas fa-trash-alt"/>Hủy</button>
+                    <Button variant="outlined" color="primary"
+                        onClick={()=>setStatusOrder(orderId,"PUT",2)}
+                    >
+                        Chuẩn bị hàng
+                    </Button>
+                    <hr/>
+                    <Button
+                        variant="outlined"
+                        startIcon={<DeleteIcon />}
+                        color="primary"
+                        onClick={()=>setStatusOrder(orderId,"DELETE",null)}
+                    >
+                       Hủy đơn
+                    </Button>
                 </td>
             )
         }
         if(status === 2){
             result=(
                 <td>
-                    <button type="button" className="comfirm-order-admin-h">Đang giao</button>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                    >
+                       Đang giao
+                    </Button>
                 </td>
             )
         }
         if(status === 3){
             result=(
                 <td>
-                    <button type="button" className="comfirm-order-admin-h">Thành công</button>
+                    <Button variant="outlined" color="secondary">
+                    Thành công
+                    </Button>
                 </td>
             )
         }
         if(status === 4){
             result=(
                 <td>
-                    <button type="button" className="comfirm-order-admin-h">Đã hủy</button>
+                    <Button variant="outlined">
+                     Đã hủy
+                    </Button>
                 </td>
             )
         }
@@ -71,16 +93,6 @@ const OrderManager = (props) => {
                         </td>
                         <td><span className="price">{FormatNumber(item.bookPrice)}</span></td>
                         <td><span className="status_order">{statusOrder}</span></td>
-                        {/* <td>
-                            <button type="button" className="comfirm-order-admin" 
-                            onClick={()=>setStatusOrder(orderId,2)} style={{display : btItem}}
-                            >Chuẩn bị hàng</button>
-                            <button type="button" className="comfirm-order-admin-h" style={{display : btItem}} 
-                            onClick={()=>setStatusOrder(orderId,4)}><i className="fas fa-trash-alt"/>Hủy</button>
-                            <button type="button" className="comfirm-order-admin" 
-                            style={{display : btItem}}
-                            >Thành công</button>
-                        </td> */}
                         {showStatus(orderId)}
                     </tr>
                 </tbody>
@@ -89,21 +101,22 @@ const OrderManager = (props) => {
         return result;
     } 
     var {orderId,fullname} = props;
+    if(Loading) return( <Loadings load="block" /> )
     return (
         <table className="table list-order">
-                <thead className="tx">
-                <tr>
-                    <th scope="col" colSpan="4">
-                        <span className="name-user">
-                            <span>{fullname}</span>
-                            <Avatar alt="Cindy Baker" src={imga} />
-                        </span>
-                        <span className="id-order-user">ID đơn hàng : {orderId}</span>
-                    </th>
-                </tr>
-                </thead>
-                {showOrderItems()}
-            </table>
+            <thead className="tx">
+            <tr>
+                <th scope="col" colSpan="4">
+                    <span className="name-user">
+                        <span>{fullname}</span>
+                        <Avatar alt="Cindy Baker" src={imga} />
+                    </span>
+                    <span className="id-order-user">ID đơn hàng : {orderId}</span>
+                </th>
+            </tr>
+            </thead>
+            {showOrderItems()}
+        </table>
     );
 };
 

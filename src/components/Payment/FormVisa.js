@@ -1,12 +1,13 @@
 import React ,{ useState} from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector  } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter,useHistory  } from 'react-router-dom'
 import CallApi from '../../utils/Api5004';
 import CallApiCart from '../../utils/ApiToken';
 import LoadingOrder from '../../common/loading/loadingUpdate';
 import FormatNumber from '../../utils/FormatNumber';
 const MyCheckoutForm = (props) => {
+  const history = useHistory();
   const dataCart = useSelector(state => state.dataCart);
   const [loading,setLoading] = useState(false);
   const [loadingButton,setLoadingButton] = useState(false);
@@ -74,8 +75,8 @@ const AddOrder = (id_payment) =>{
     var token = localStorage.getItem("token");
     var price = getTotalCartItem();
     var paymentIntent = await CallApi("/order/payment","POST",token,price)
-
     var client_secret = paymentIntent.data.paymentIntent.client_secret;
+
     const result = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement)
@@ -87,9 +88,9 @@ const AddOrder = (id_payment) =>{
     } else {
       if (result.paymentIntent.status === 'succeeded') {
         setLoading(true)
-        await AddOrder(client_secret);
+        await AddOrder(paymentIntent.data.paymentIntent.id);
         DeleteAllCart()
-        props.history.push('/user/order')
+        history.push('/user/order')
       }
     }
   };

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import img from '../../assets/images/avatar.png';
 import Rating from '@material-ui/lab/Rating';
-import axios from 'axios';
 class productReviews extends Component {
     constructor(props) {
         super(props);
@@ -15,27 +14,15 @@ class productReviews extends Component {
         var result = "";
         if(parseInt(OneProduct.rating) > 0){
             result = (
-                <Rating name="read-only" value={parseInt(OneProduct.rating)} readOnly />
+                <Rating name="read-only" size="small" value={parseInt(OneProduct.rating)} readOnly />
             )
         }
         return result;
     }
-    getComment = async (idBook)=>{
-        var resp = await axios.get("https://localhost:5005/api/comment?bookid="+idBook);
-        var isComment = !!resp;
-        if(isComment){
-            this.setState({
-                comment : resp.data.data
-            })
-        }
-    }
-    componentDidMount(){
-        this.getComment(this.props.idBook)
-    }
     showComment =()=>{
-        var  {comment} = this.state;
+        var  {comment} = this.props;
         var result = "";
-        if(comment.length > 0){
+        if(comment !== null){
             result = comment.map((item,index)=>{
                 return(
                     <div className="container-chat" key={index}>
@@ -48,9 +35,9 @@ class productReviews extends Component {
                         </div>
                         <div className="comment-user">
                             <div className="user-name">
-                                <label className="name-reply">{item.fullName}</label>
-                                <Rating name="read-only" value={item.rating} readOnly />
-                                <label className="time-comment">&ensp;{item.createdDate}</label>
+                                <span className="name-reply">{item.fullName}</span>
+                                <Rating name="read-only" value={item.rating} style={{ fontSize : "19px" }} readOnly />
+                                <span className="time-comment">&ensp;{item.createdDate}</span>
                             </div>
                             <div className="content-comment">
                                 <p>{item.content}</p>

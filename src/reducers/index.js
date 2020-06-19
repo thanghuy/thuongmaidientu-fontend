@@ -5,6 +5,7 @@ import UserName from './userName';
 import Address from './address';
 import ActiveMenu from './MenuAdmin';
 import AddOrderItem from './CheckPayment';
+import Comment from './comment';
 const appReducers = combineReducers({
     status : status,
     dataUser : status,
@@ -13,6 +14,7 @@ const appReducers = combineReducers({
     userName : UserName,
     dataAddress : Address,
     ActiveMenu,
-    AddOrderItem
+    AddOrderItem,
+    dataComment : Comment
 });
 export default appReducers;

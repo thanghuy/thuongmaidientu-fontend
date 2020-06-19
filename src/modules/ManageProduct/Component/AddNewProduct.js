@@ -218,11 +218,16 @@ const AddNewProduct = () => {
                                 type="text"
                                 className="form-control"
                                 name="amount"
-                                ref={register({required : true})}
+                                ref={register({required : true , pattern : /^\d+$/})}
                                 />
                                 {errors.amount && errors.amount.type === "required" &&(
                                 <div className="is-invalid-feedback">
                                     {message.EmptyInput}
+                                </div>
+                                )}
+                                {errors.amount && errors.amount.type === "pattern" &&(
+                                <div className="is-invalid-feedback">
+                                    Số lượng phải là số
                                 </div>
                                 )}
                             </div>
@@ -234,11 +239,16 @@ const AddNewProduct = () => {
                                 type="text"
                                 className="form-control"
                                 name="price"
-                                ref={register({required : true})}
+                                ref={register({required : true, pattern : /^\d+$/})}
                                 />
                                  {errors.price && errors.price.type === "required" &&(
                                 <div className="is-invalid-feedback">
                                     {message.EmptyInput}
+                                </div>
+                                )}
+                                {errors.price && errors.price.type === "pattern" &&(
+                                <div className="is-invalid-feedback">
+                                    Số lượng phải là số
                                 </div>
                                 )}
                             </div>

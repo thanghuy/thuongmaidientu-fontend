@@ -5,6 +5,12 @@
     <title>Authentification callback processing..</title>
 </head>
 <style>
+    .bodyloading{
+        width: 100%;
+        height: 1000px;
+        display: flex;
+        background: rgb(0, 0, 0,0.1);
+    }
     .loading-login-main {
         position: absolute;
         top: 30%;
@@ -20,8 +26,10 @@
     <noscript>
         You need to enable JavaScript to run this app.
     </noscript>
-    <img class="loading-login-main">
-        <img src="../src/assets/images/loading.gif" alt="loadingupdate"></img>
+    <div class="bodyloading">
+        <div class="loading-login-main">
+            <img src="./loading.gif" alt="loadingupdate"></div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.8.2/oidc-client.js"></script>

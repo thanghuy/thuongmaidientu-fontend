@@ -35,13 +35,6 @@ class cart extends Component {
                 )
             })
         }
-        else{
-            result = (
-                <div className="cart_empty">
-                    <img src={cartimge}  alt="cart_empty"/>
-                </div>
-            )
-        }
         return result
     }
     render() {
@@ -52,31 +45,54 @@ class cart extends Component {
                 number += element.amount;
             })
         }
-        return (
-            <div className="cart">
-                <div className="cart_container d-flex flex-row align-items-center justify-content-end">
-                    <div className="cart_content">
-                        <Link to="/cart">
-                            <div className="cart_icon">
-                                <img src={cartimg} alt="cart"></img>
-                                <div className="cart_count"><span>{number}</span></div>
-                            </div>
-                        </Link>
-                        <div className="show-cart">
-                            <div className="title_cart">
-                                <h5>Danh sách sản phẩm</h5>
-                            </div>
-                            <div className="show-cart-m01">
-                                {this.AddCart()}
-                            </div>
-                            <div className="to_cart">
-                                <Link to="/cart">Đến giỏ hàng</Link>
+        if(dataCart.length === 0){
+            return (
+                <div className="cart">
+                    <div className="cart_container d-flex flex-row align-items-center justify-content-end">
+                        <div className="cart_content">
+                            <Link to="/cart">
+                                <div className="cart_icon">
+                                    <img src={cartimg} alt="cart"></img>
+                                    <div className="cart_count"><span>{number}</span></div>
+                                </div>
+                            </Link>
+                            <div className="show-cart">
+                                <div className="cart_empty">
+                                    <img src={cartimge}  alt="cart_empty"/>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            )
+        }
+        else{
+            return (
+                <div className="cart">
+                    <div className="cart_container d-flex flex-row align-items-center justify-content-end">
+                        <div className="cart_content">
+                            <Link to="/cart">
+                                <div className="cart_icon">
+                                    <img src={cartimg} alt="cart"></img>
+                                    <div className="cart_count"><span>{number}</span></div>
+                                </div>
+                            </Link>
+                            <div className="show-cart">
+                                <div className="title_cart">
+                                    <h5>Danh sách sản phẩm</h5>
+                                </div>
+                                <div className="show-cart-m01">
+                                    {this.AddCart()}
+                                </div>
+                                <div className="to_cart">
+                                    <Link to="/cart">Đến giỏ hàng</Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

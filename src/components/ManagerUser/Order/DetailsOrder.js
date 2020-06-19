@@ -25,18 +25,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
 }));
-
-function getSteps() {
-  return ['Đang xử lý', 'Đã xử lý', 'Đã nhận'];
-}
-
 const DetailOrder = (props) => {
   const classes = useStyles();
-  const steps = getSteps();
   const showOrderItem =(dataOrder,OrderId,status)=>{
     var result = null;
-    var disabled = status === 3 ? null : "active-click-comment" 
+    //var disabled = status === 3 ? null : "active-click-comment";  
     result = dataOrder.map((orderIteam,index)=>{
+      var disabled = !orderIteam.isRate && status === 3  ? null : "active-click-comment";
+      var contentStatus = orderIteam.isRate  && status === 3  ? "Đã nhận xét" : "Viết nhận xét"
       var imageProduct = UrlImg.urlImg + orderIteam.image;
         return(
           <tr className="order-detaile-manager" key={index}>
@@ -50,7 +46,7 @@ const DetailOrder = (props) => {
             </td>
             <td>
                 <Link to={`/comment/${orderIteam.orderItemId}/${orderIteam.slug}.${orderIteam.bookId}`} className={disabled}>
-                  <span className="product-review">Viết nhận xét</span>
+                  <span className="product-review">{contentStatus}</span>
                 </Link>
             </td>
             <td><span className="price">{FormatNumber(orderIteam.bookPrice)}</span></td>
@@ -191,9 +187,13 @@ const DetailOrder = (props) => {
     var idOrder = params.get("idOrder");
     var {dataOrder} = props;
     var result = "";
+    var steps = ["Đang xử lý","Đã xử lý","Đã nhận"];
     result = dataOrder.map((item,index)=>{
       if(item.orderId ===  parseInt(idOrder)){
         var status = parseInt(item.status);
+        if(parseInt(item.status) === 4){
+          steps.push("Đã hủy");
+        }
         return(
           <Stepper activeStep={status} alternativeLabel key={index} >
             {steps.map((label) => (
