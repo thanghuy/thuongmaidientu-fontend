@@ -132,7 +132,6 @@ const AddOrder = (id_payment) =>{
                 }}
             />
         </div>
-        <span> card demo : 4000002500003155 </span>
         <div className="content-payment-01">
             <p>
             Tổng tiền:
