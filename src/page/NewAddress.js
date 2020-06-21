@@ -3,6 +3,7 @@ import callApi from '../utils/api5003';
 import { useForm } from "react-hook-form";
 import LoadingUpdate from '../common/loading/loadingUpdate';
 import * as message from '../constant/message';
+import {withRouter} from "react-router-dom";
 const style ={
     marginTop : "20px",
     marginBottom : "20px",
@@ -190,28 +191,11 @@ const FormAddress =(props)=> {
             return result;
         }
     }
-    const changeAddress = async (id,token) =>{
-        try {
-            setState(prev=>({
-                ...prev,
-                loading : true
-            }))
-            var resp = await callApi("/addressuser/changedefault/"+id,"PUT",token,null)
-            setState(prev=>({
-                ...prev,
-                loading : false
-            }))
-            console.log(resp)
-        } catch (error) {
-            setState(prev=>({
-                ...prev,
-                id : null,
-                loading : false
-            }))
-        }
-        
-    }
     const putAddress = async (dataA) =>{
+        setState(prev=>({
+            ...prev,
+           loading : true
+        }))
         var token = localStorage.getItem("token");
         var username = JSON.parse(localStorage.getItem("userName"));
         var data = {
@@ -223,20 +207,13 @@ const FormAddress =(props)=> {
             District : dataA.district,
             Street : dataA.detailAddress 
         }
-        // var result = await axios({
-        //     method : "POST",
-        //     url : "https://localhost:5003/api/addressuser",
-        //     headers: {
-        //         Authorization:"Bearer " + token,
-        //         'Access-Control-Allow-Origin': '*',
-        //         'Content-Type': 'application/json'
-        //     }, 
-        //     data : data
-        // })
-        var result = await callApi("/addressuser","PUT",token,data)
-        if(result !== ""){
-            changeAddress(result.data.data.id,token)
-        }
+        await callApi("/addressuser","POST",token,data);
+        setState(prev=>({
+            ...prev,
+           loading : false
+        }))
+        props.history.push("/xac-nhan-don-hang");
+        
     }
     var {activeList,activeDi,activeWa,district,provinceOrCity,ward,loading} = state;
     var activeListA = activeList ? "block" : "none";
@@ -349,4 +326,4 @@ const FormAddress =(props)=> {
     );
 }
 
-export default FormAddress;
+export default withRouter(FormAddress);

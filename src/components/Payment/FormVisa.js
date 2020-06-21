@@ -1,15 +1,15 @@
 import React ,{ useState} from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useSelector  } from 'react-redux';
-import { withRouter,useHistory  } from 'react-router-dom'
+import { withRouter,Link} from 'react-router-dom'
 import CallApi from '../../utils/Api5004';
 import CallApiCart from '../../utils/ApiToken';
 import LoadingOrder from '../../common/loading/loadingUpdate';
 import FormatNumber from '../../utils/FormatNumber';
 const MyCheckoutForm = (props) => {
-  const history = useHistory();
   const dataCart = useSelector(state => state.dataCart);
   const [loading,setLoading] = useState(false);
+  const [sussces,setSussces] = useState(false);
   const [loadingButton,setLoadingButton] = useState(false);
   const getAddressMain =()=>{
     var data = props.dataAddress === "" ? [] : props.dataAddress;
@@ -90,7 +90,7 @@ const AddOrder = (id_payment) =>{
         setLoading(true)
         await AddOrder(paymentIntent.data.paymentIntent.id);
         DeleteAllCart()
-        history.push('/user/order')
+        setSussces(true);
       }
     }
   };
@@ -109,6 +109,7 @@ const AddOrder = (id_payment) =>{
     return FormatNumber(totalCart);
   }
   var activeLoading = loadingButton ? <span><i className="fa fa-spinner fa-spin"></i> Đang tải</span>: "Đặt hàng";
+  var showSussces = sussces ? "block" : "none";
   return (
     <form onSubmit={handleSubmit}>
       <LoadingOrder load={loading ? "block" : "none"} />
@@ -141,7 +142,19 @@ const AddOrder = (id_payment) =>{
               {activeLoading}
             </button>
         </div>
-        
+        <div className="confirm-de" style={{display : showSussces}}>
+            <div className="md-delete container" style={{background :"#f2f3f5"}}>
+                <div className="md-delete-tilte">Bạn đã đặt hàng thành công</div>
+                <div>
+                    <Link to="/user/order">
+                      <button className="md-delete-bt" type="button">Xem đơn hàng của bạn</button>
+                    </Link>
+                    <Link to="/">
+                      <button className="md-delete-bt" type="button" style={{background :"#ffffff", color : "black"}}>Tiếp tục mua sắm</button>
+                    </Link>
+                </div>
+            </div>
+        </div>
     </form>
   );
 };

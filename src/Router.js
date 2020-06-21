@@ -20,6 +20,7 @@ import AdAddNewProduct from './page/AdNewProduct';
 import AdUpdateProduct from './page/UpdateProduct';
 import NewAddress from './page/NewAddress';
 import Comment from './page/Comment';
+import Not from './common/Empty/Empty';
 import { connect } from 'react-redux';
 class Routes extends Component {
     render(){
@@ -61,7 +62,7 @@ class Routes extends Component {
                             <RouterAdmin key="10" path="/admin" exact component={HomeAdmin}/>
                             <RouterAdmin key="11" path="/quan-ly-don-hang" exact component={ManageOrder}/>
                             <RouterAdmin key="12" path="/san-pham/all-product" exact component={AdAllProduct}/>
-                            <RouterAdmin key="14" path="/quan-ly-shop" exact component={ManageOrder}/>
+                            <RouterAdmin key="14" path="/quan-ly-shop" exact component={Not}/>
                             <RouterAdmin key="15" path="/san-pham/add-new-product" exact component={AdAddNewProduct}/>
                             <RouterAdmin key="16" path="/san-pham/update-product/:idProduct" exact component={AdUpdateProduct}/>
                             <Route path="" exact={false} component={NotFound}/>
@@ -84,7 +85,7 @@ class Routes extends Component {
                             <RouterAdmin key="10" path="/admin" exact component={HomeAdmin}/>
                             <RouterAdmin key="11" path="/quan-ly-don-hang" exact component={ManageOrder}/>
                             <RouterAdmin key="12" path="/san-pham/all-product" exact component={AdAllProduct}/>
-                            <RouterAdmin key="14" path="/quan-ly-shop" exact component={ManageOrder}/>
+                            <RouterAdmin key="14" path="/quan-ly-shop" exact component={<Not/>}/>
                             <RouterAdmin key="15" path="/san-pham/add-new-product" exact component={AdAddNewProduct}/>
                             <RouterAdmin key="16" path="/san-pham/update-product/:idProduct" exact component={AdUpdateProduct}/>
                             <Route path="" exact={false} component={NotFound}/>

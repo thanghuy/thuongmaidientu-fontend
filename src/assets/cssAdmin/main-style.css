@@ -297,3 +297,8 @@
 .MuiButton-containedPrimary{
     background-color: #0e8ce4 !important; 
 }
+
+.all-admin-list-product .MuiIconButton-label{
+    margin-left: 10px !important;
+    color: #3ed89f !important;
+}

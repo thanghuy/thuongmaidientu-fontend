@@ -8,6 +8,7 @@ import CallApi from '../../../utils/ApiController';
 import FormatNumber from '../../../utils/FormatNumber';
 import * as UrlImg from '../../../constant/config';
 import {Link} from "react-router-dom";
+import Switch from '@material-ui/core/Switch';
 import Loadings from '../../../common/loading/loadingUpdate';
   const useStyles = makeStyles({
     root: {
@@ -60,7 +61,9 @@ import Loadings from '../../../common/loading/loadingUpdate';
               <td>{product.category.name}</td>
               <td className="price">{FormatNumber(product.price)}</td>
               <td>{product.amount}</td>
-              <td>x</td>
+              <td> 
+                  <Switch checked={true} color="primary" size="small"/>
+              </td>
               <td>
                   <Link to={`/san-pham/update-product/${product.bookId}`}><button type="button" className="update-product-admin">Sửa</button></Link>
                   <button type="button" className="update-product-admin">Xóa</button>

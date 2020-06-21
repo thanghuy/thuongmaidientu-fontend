@@ -366,12 +366,10 @@
 
 // export default withRouter(AddNewProduct);
 import React from 'react';
-
+import Emty from '../../../common/Empty/Empty';
 const UpdateProduct = () => {
     return (
-        <div>
-            Chua xu ly
-        </div>
+        <Emty message="Chức năng chưa hoàn thiện"/>
     );
 };
 

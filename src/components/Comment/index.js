@@ -7,12 +7,14 @@ import CallApi from '../../utils/ApiController';
 import CallApi5004 from '../../utils/Api5004';
 import { useForm } from "react-hook-form";
 import LoadingUp from '../../common/loading/loadingUpdate';
-
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 const Index = (props) => {
     const [OneProduct,setOneProduct] = useState("");
     const [rating,setRating]= React.useState(0);
     const [error1,setError1] = useState(false);
     const [load,setLoad] = useState(false);
+    const [comm,setComm] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const getDataDetail = (idBook) =>{
         CallApi("/book/"+idBook,"GET",null,null).then(resp =>{
@@ -47,7 +49,7 @@ const Index = (props) => {
                 var token = localStorage.getItem("token");
                 await CallApi5004("/rating","POST",token,data);
                 setLoad(false)
-                props.history.push(`/product/${OneProduct.slug}.${OneProduct.bookId}.html`)
+                setComm(true)
             } catch (error) {
                 setLoad(false)
                 props.history.push(`/`)
@@ -70,10 +72,67 @@ const Index = (props) => {
     var img = OneProduct.imagePath === undefined ?"/Images/book1.jpg" :  OneProduct.imagePath;
     var imageMain = URL.urlImg + img;
     var Message1 = error1 ? "block" : "none";
+    var showSussess = comm ? "hidden" : "visited";
+    var LinkComment = comm ? "block" : "none";
     return (
         <div className="container">
             <LoadingUp load={load ? "block" : "none"} />
-            <div className="product-review-comment row">
+            <div className="product-review-comment row" style={{marginTop : "10px",display : LinkComment}}>
+                <div className="product-customer-col-5 col-12">
+                    <div className="product-detail">
+                        <div className="image">
+                        <Link to={`/product/${OneProduct.slug}.${OneProduct.bookId}.html`}>
+                            <img
+                            src={imageMain}
+                            alt="11"
+                            />
+                        </Link>
+                        </div>
+                        <div className="info">
+                        <div className="title">{OneProduct.name}</div>
+                        <div itemProp="brand" itemScope itemType="http://schema.org/Brand">
+                            <meta itemProp="name" content="LAZA" />
+                            <meta
+                            itemProp="url"
+                            content="http://tiki.vn/thuong-hieu/laza.html"
+                            />
+                        </div>
+                        <div className="item-brand">
+                            <div className="item-other">
+                            <div
+                                itemProp="aggregateRating"
+                                itemScope
+                                itemType="http://schema.org/AggregateRating"
+                            >
+                                <meta itemProp="ratingValue" content="3.6" />
+                                <meta itemProp="ratingCount" content={33} />
+                            </div>
+                            <div className="item-rating">
+                                <p className="rating">
+                                <span className="rating-box">
+                                    {showRating()}
+                                </span>
+                                <span>(33 đánh giá)</span>
+                                </p>
+                            </div>
+                            <div className="item-rating">
+                                <Typography variant="h6">
+                                    Bạn đã đánh giá thành công
+                                </Typography>
+                                <Link to={`/product/${OneProduct.slug}.${OneProduct.bookId}.html`}>
+                                    <Button variant="outlined" color="primary"
+                                    >
+                                        Xem đánh giá của bạn
+                                    </Button>
+                                </Link>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="product-review-comment row"  style={{ visibility : showSussess }}>
                 <h3 className="js-customer-h3">Gửi nhận xét của bạn</h3>
                 <div className="product-customer-col-4 col-6">
                 <form
@@ -203,7 +262,7 @@ const Index = (props) => {
                 </div>
                 </div>
             </div>
-            </div>
+        </div>
     );
 };
 
