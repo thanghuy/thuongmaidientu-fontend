@@ -30,7 +30,7 @@ const OrderManager = (props) => {
                     <Button variant="outlined" color="primary"
                         onClick={()=>setStatusOrder(orderId,"PUT",2)}
                     >
-                        Chuẩn bị hàng
+                        Xác nhận
                     </Button>
                     <hr/>
                     <Button
